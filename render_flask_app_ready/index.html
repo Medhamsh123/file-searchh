@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>File Upload</title></head>
+<body>
+  <h2>Upload a File</h2>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" required><br>
+    <input type="text" name="tags" placeholder="Enter tags"><br>
+    <button type="submit">Upload</button>
+  </form>
+  <h3>Uploaded Files:</h3>
+  <div id="fileList"></div>
+<script>
+async function loadFiles() {
+  const res = await fetch("/files");
+  const files = await res.json();
+  const list = document.getElementById("fileList");
+  list.innerHTML = "";
+  files.forEach(file => {
+    list.innerHTML += `<div><strong>${file.name}</strong> - ${file.size} - <a href="/download/${file.relative_path}" target="_blank">Download</a></div>`;
+  });
+}
+loadFiles();
+</script>
+</body>
+</html>

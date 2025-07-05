@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: mongo-cloud-flask
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: MONGO_USER
+        sync: false
+      - key: MONGO_PASS
+        sync: false
+      - key: MONGO_CLUSTER
+        sync: false
+      - key: MONGO_DB
+        sync: false
